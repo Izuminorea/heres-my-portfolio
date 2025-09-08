@@ -79,4 +79,4 @@ def download_cv():
     return send_from_directory(CV_DIRECTORY, CV_FILENAME, as_attachment=True)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, host='0.0.0.0')
