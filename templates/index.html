@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='img/MyLogo-removebg-preview.png') }}" alt="Logo">
+        </div>
+        <a href="/">Portfolio</a>
+    </div>
+    <main>
+    
+        <!-- Popup Modal -->
+        <div id="emailModal" class="modal" onclick="outsideClick(event)">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2>Hire me!</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject:</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message:</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="button" class="submit-btn" onclick="sendEmail()">Send Email</button>
+                </form>
+            </div>
+        </div>
+
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="visitor-container">
+                        <p class="visitor-counter">Total Visitors: <strong>{{ visitor_count }}</strong></p>
+                        <p class="visitor-counter">Total CV Downloads: <strong>{{ download_count }}</strong></p>
+                    </div>                    
+                    <h1>Hello, I'm Aeron Paul G. Salipsip 
+                        <img src="{{ url_for('static', filename='img/chat-gpt.png') }}" class="verified-badge">
+                        <span class="verified-text">ChatGPT Verified</span>
+                    </h1>
+                    <h1>I'm a <span class="highlight">Fullstack Developer</span></h1>                         
+                    <p>Python Flask developer Using MySQL, PostgreSQL Database.</p>
+                    <div class="btn-group">
+                        <a href="https://api.whatsapp.com/send?phone=09951147458" class="btn btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://t.me/YOUR_TELEGRAM_USERNAME" class="btn btn-telegram" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <a href="https://facebook.com/vaperssss " class="btn btn-facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="{{ url_for('download_cv') }}" class="btn btn-cv" target="_blank">
+                            <i class="fas fa-download"></i> Download My CV
+                        </a>                        
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="{{ url_for('static', filename='img/GradPic.jpg') }}" alt="Profile Picture">
+                </div>
+                    <button class="email-btn" onclick="openModal()">
+                        <i class="fas fa-envelope"></i>Hire
+                    </button>            
+            </div>
+
+        </section>
+        <section class="about">
+            <h2>About Me</h2>
+            <p>Welcome to BackendBaron! I'm Aeron Paul Salipsip, a backend developer and the founder of BackendBaron. 
+                With a passion for building scalable and secure backend solutions, I specialize in Python and Flask development, 
+                helping businesses streamline their operations and grow through technology. 
+                At BackendBaron, we focus on delivering tailored backend services such as database management and system security.
+                Whether you're a startup or an SME looking to enhance your backend infrastructure, 
+                BackendBaron is here to provide customized solutions that meet your needs.
+            </p>
+            
+            <h2>Located At</h2>
+            <!-- Google Map Embed -->
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1931.2552205241162!2d120.7806358!3d15.4568039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3390e82b3a1e40d9%3A0x6baf4e4e975a2e59!2sZaragoza%2C%20Nueva%20Ecija%2C%20Philippines!5e0!3m2!1sen!2sph!4v1707797320000!5m2!1sen!2sph" 
+                    width="100%" 
+                    height="500" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </section>
+
+        <section class="projects">
+            <h2>Featured Projects</h2>
+            <h2>Asia Pacific College of Business and Arts (APCBA) Student Portal</h2>
+            <p>Deployment: Located at Manzano St, Pob. Norte, Rizal, 3127 Nueva Ecija, Philippines</p>
+            <div class="project-list">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <!-- Project 1 -->
+                        <div class="swiper-slide project-item">
+                            <div class="project-header">
+                                <div class="project-icon" id="openModal1">
+                                    <img src="../static/img/registration.png" alt="Dashboard Icon">
+                                </div>
+                                <div class="project-icon-label">View Project Description</div> <!-- Text below icon -->
+                            </div>
+                            <div class="project-header">
+                                <div class="project-icons-container">
+                                    <!-- Python Icon -->
+                                    <div class="project-icon-wrapper">
+                                        <div class="project-icon" id="openPythonModal">
+                                            <img src="../static/img/python.png" alt="Python Icon">
+                                        </div>
+                                        <div class="project-icon-label">Python</div>
+                                    </div>
+                            
+                                    <!-- Flask Icon -->
+                                    <div class="project-icon-wrapper">
+                                        <div class="project-icon" id="openFlaskModal">
+                                            <img src="../static/img/4691324_flask_icon.png" alt="Flask Icon">
+                                        </div>
+                                        <div class="project-icon-label">Flask</div>
+                                    </div>
+                            
+                                    <!-- MySQL Icon -->
+                                    <div class="project-icon-wrapper">
+                                        <div class="project-icon" id="openMySQLModal">
+                                            <img src="../static/img/postgreSQL.png" alt="MySQL Icon">
+                                        </div>
+                                        <div class="project-icon-label">PostgreSQL</div>
+                                    </div>
+                            
+                                    <!-- HTML Icon -->
+                                    <div class="project-icon-wrapper">
+                                        <div class="project-icon" id="openHTMLModal">
+                                            <img src="../static/img/html.png" alt="HTML Icon">
+                                        </div>
+                                        <div class="project-icon-label">HTML</div>
+                                    </div>
+                            
+                                    <!-- CSS Icon -->
+                                    <div class="project-icon-wrapper">
+                                        <div class="project-icon" id="openCSSModal">
+                                            <img src="../static/img/css.png" alt="CSS Icon">
+                                        </div>
+                                        <div class="project-icon-label">CSS</div>
+                                    </div>
+                            
+                                    <!-- JavaScript Icon -->
+                                    <div class="project-icon-wrapper">
+                                        <div class="project-icon" id="openJSModal">
+                                            <img src="../static/img/js-file.png" alt="JavaScript Icon">
+                                        </div>
+                                        <div class="project-icon-label">JavaScript</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="image-slider">
+                                <div class="swiper-container-inner">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/User_Side1.png" alt="Project 1 - Image 1">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/User_Side2.png" alt="Project 1 - Image 2">                    
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/User_Side3.png" alt="Project 1 - Image 3">                                           
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/User_Side4.png" alt="Project 1 - Image 3">                                           
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/User_Side5.png" alt="Project 1 - Image 3">                                            
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/User_Side6.png" alt="Project 1 - Image 3">                                           
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/Admin_Side1.png" alt="Project 1 - Image 3">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/Admin_Side2.png" alt="Project 1 - Image 3">                                         
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/Admin_Side3.png" alt="Project 1 - Image 3">                                          
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/Admin_Side4.png" alt="Project 1 - Image 3">                                          
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/Admin_Side5.png" alt="Project 1 - Image 3">  
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/Admin_Side6.png" alt="Project 1 - Image 3">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/Admin_Side7.png" alt="Project 1 - Image 3">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/Admin_Side8.png" alt="Project 1 - Image 3">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/Admin_Side9.png" alt="Project 1 - Image 3">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/Admin_Side10.png" alt="Project 1 - Image 3">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/Admin_Side11.png" alt="Project 1 - Image 3">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/Admin_Side12.png" alt="Project 1 - Image 3">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/Admin_Side13.png" alt="Project 1 - Image 3">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/Admin_Side14.png" alt="Project 1 - Image 3">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/Admin_Side15.png" alt="Project 1 - Image 3">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/APCBA/Admin_Side16.png" alt="Project 1 - Image 3">
+                                        </div>
+                                    </div>
+                                    <!-- Inner Navigation -->
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
+                                </div>                                
+                            </div>
+                        </div>
+                        
+                        
+            </div>
+        </section>
+        <section class="projects">
+            <h2>Guest FeedBack System(GFS)</h2>
+            <p>Deployment: 5 Star Hotel Forest Lodge at Camp John Hay Baguio City Philippines</p>
+            <div class="project-list">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <!-- Project 1 -->
+                        <div class="swiper-slide project-item">
+                            <!-- Icon and Description Container -->
+                            <div class="project-header">
+                                <div class="project-icon" id="openModal2">
+                                    <img src="../static/img/registration.png" alt="Dashboard Icon">
+                                </div>
+                                <div class="project-icon-label">View Project Description</div> <!-- Text below icon -->
+                            </div>
+                            <div class="project-header">
+                                <div class="project-icons-container">
+                                    <!-- Python Icon -->
+                                    <div class="project-icon-wrapper">
+                                        <div class="project-icon" id="openPythonModal">
+                                            <img src="../static/img/python.png" alt="Python Icon">
+                                        </div>
+                                        <div class="project-icon-label">Python</div>
+                                    </div>
+                            
+                                    <!-- Flask Icon -->
+                                    <div class="project-icon-wrapper">
+                                        <div class="project-icon" id="openFlaskModal">
+                                            <img src="../static/img/4691324_flask_icon.png" alt="Flask Icon">
+                                        </div>
+                                        <div class="project-icon-label">Flask</div>
+                                    </div>
+                            
+                                    <!-- MySQL Icon -->
+                                    <div class="project-icon-wrapper">
+                                        <div class="project-icon" id="openMySQLModal">
+                                            <img src="../static/img/mysql.png" alt="MySQL Icon">
+                                        </div>
+                                        <div class="project-icon-label">MySQL</div>
+                                    </div>
+                            
+                                    <!-- HTML Icon -->
+                                    <div class="project-icon-wrapper">
+                                        <div class="project-icon" id="openHTMLModal">
+                                            <img src="../static/img/html.png" alt="HTML Icon">
+                                        </div>
+                                        <div class="project-icon-label">HTML</div>
+                                    </div>
+                            
+                                    <!-- CSS Icon -->
+                                    <div class="project-icon-wrapper">
+                                        <div class="project-icon" id="openCSSModal">
+                                            <img src="../static/img/css.png" alt="CSS Icon">
+                                        </div>
+                                        <div class="project-icon-label">CSS</div>
+                                    </div>
+                            
+                                    <!-- JavaScript Icon -->
+                                    <div class="project-icon-wrapper">
+                                        <div class="project-icon" id="openJSModal">
+                                            <img src="../static/img/js-file.png" alt="JavaScript Icon">
+                                        </div>
+                                        <div class="project-icon-label">JavaScript</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="image-slider">
+                                <div class="swiper-container-inner">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/GFS(ForestLodge)/Users_Page1.png" alt="Project 1 - Image 1">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/GFS(ForestLodge)/Users_Page2.png" alt="Project 1 - Image 2">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/GFS(ForestLodge)/Users_Page3.png" alt="Project 1 - Image 3">   
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/GFS(ForestLodge)/Users_Page4.png" alt="Project 1 - Image 4">   
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/GFS(ForestLodge)/Users_Page5.png" alt="Project 1 - Image 5">    
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/GFS(ForestLodge)/Admin_Page1.png" alt="Project 1 - Image 6">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/GFS(ForestLodge)/Admin_Page2.png" alt="Project 1 - Image 7">                                         
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/GFS(ForestLodge)/Admin_Page3.png" alt="Project 1 - Image 8">                                           
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/GFS(ForestLodge)/Admin_Page4.png" alt="Project 1 - Image 9">                                            
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/GFS(ForestLodge)/Admin_Page5.png" alt="Project 1 - Image 10">                                       
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/GFS(ForestLodge)/Admin_Page6.png" alt="Project 1 - Image 11">                                           
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="../static/img/GFS(ForestLodge)/gfs_database_structure.png" alt="Project 1 - Image 12">                                           
+                                        </div>
+                                    </div>
+                                    <!-- Inner Navigation -->
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- MODAL GFS -->
+        <div id="modalContainerGFS" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>WHAT IS GFS?</h2>
+                <p>A Guest Feedback System is a structured platform that allows hotel guests to share their experiences, rate services, and provide suggestions for improvement. It is designed to collect, analyze, and manage feedback efficiently, helping hotels enhance their customer service and overall guest experience.
+                    Admin
+
+                    Reviews and manages guest feedback.
+                    Generates reports on guest satisfaction.
+                    Monitors staff performance based on feedback.
+
+                    Super Admin
+
+                    Has full system control and management.
+                    Manages Admin accounts and user permissions.
+                    Oversees system configuration and settings.
+                    Generates advanced reports for decision-making.
+                                        
+                </p>
+            </div>
+        </div>
+
+        <!--MODAL APCBA-->
+        <div id="modalContainerAPCBA" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>WHAT IS APCBA?</h2>
+                <p>Admin Dashboard</p>
+                <p>The admin dashboard provides a comprehensive overview with various cards and charts for efficient management. It includes sections displaying the total number of teachers, students, users, and courses. Additionally, it features a breakdown of yearly student portal admissions for different academic levels, including Grade 11, Grade 12, First Year, Second Year, Third Year, and Fourth Year. There is also a chart showing the distribution of active and inactive students.
+                </p>
+                <p>Teacher Dashboard</p>
+                <p>        The teacher dashboard provides a comprehensive overview with various cards and functionalities for efficient management. It includes an announcement section where updates and important information are posted.
+
+                    The sidebar of the teacher dashboard includes the following functionalities:
+                    
+                    Announcement: View and manage announcements.
+                    Documents: Access and manage documents.
+                    Modules: Handle academic modules.
+                    Class: Organize and manage class information.
+                    </p>
+            </div>
+        </div>
+        
+        <section class="projects">
+            <h2>Certificates</h2>
+            <div class="project-list">
+                <div class="project-item">
+                    <img src="{{ url_for('static', filename='img/certificate/Oracle_Cert.png') }}" alt="Certificate 1">
+                    <h3>Course Completion</h3>
+                    <p>Database Foundation. Issued on 25th of March 2023</p>
+                </div>
+                <div class="project-item">
+                    <img src="{{ url_for('static', filename='img/certificate/OJT_cert.jpg') }}" alt="Certificate 2">
+                    <h3>Certificate Of Completion</h3>
+                    <p>200 Hours of OJT(On The Job Training) Issued on October 18, 2024 at the office of the Registrar, PHINMA-Araullo University</p>
+                </div>
+            </div>  
+        </section>
+        
+        <!--<div class="btn-group-footer">
+            <a href="https://github.com/YOUR_GITHUB_USERNAME" class="btn btn-github" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://trailblazer.me/id/YOUR_SALESFORCE_ID" class="btn btn-salesforce" target="_blank"><i class="fab fa-salesforce"></i></a>
+        </div>
+    -->
+    </main>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>
